@@ -29,7 +29,7 @@ def TakePhotoes(vk):
 	fileids.close()
 
 def main():
-	vk = vkontakte.API(token='13c403061a24dec856bcafadedb99925a7cd27f91e3773e96fbb2b3d42ca5af0e88371719f26791192fca')
+	vk = vkontakte.API(token='')
 	TakePhotoes(vk)
 	
 if __name__ == '__main__':
