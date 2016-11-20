@@ -1,4 +1,4 @@
-import vkontakte, time, requests, json
+import vkontakte, time, requests, json, sys
 	
 def CheckUpdates(updates,need_chat_id):
 	#print "Updates had taken!"
@@ -63,7 +63,8 @@ def main():
 					#file_log.close()
 					try:
 						vk.get('messages.send',peer_id=sent_to,forward_messages=str(ids_of_unread_messages),v='5.60')
-					except Exception, ex:
+					except:
+						print('msg not sent:  ' + str(sys.exc_info()[1]))
 						print("Forward_messages: " + str(ids_of_unread_messages) + "\nLen of ids_of_unread_messages: " + str(len(ids_of_unread_messages)) + "\nError is: " + str(ex))
 						#print(str(ex))
 						continue
