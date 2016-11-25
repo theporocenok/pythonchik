@@ -7,10 +7,12 @@ bot = telebot.TeleBot(token)
 
 chats = [297617298]
 
-def TakeTextFrom(file):
-	f = open(str(file))
-	textFROMstatustxt = f.read()
-	f.close()
+def TakeTextFrom(*files):
+	textFROMstatustxt=''
+	for file in files:
+		f = open(str(file))
+		textFROMstatustxt += f.read()
+		f.close()
 	return textFROMstatustxt
 
 @bot.message_handler(commands=['status'])
@@ -20,11 +22,12 @@ def send_welcome(message):
 		return 0
 
 	try:
-		textFROMstatus=str(TakeTextFrom("Ahtarova.txt"))
-		textFROMstatus+=str(TakeTextFrom("Ershova.txt"))
-		textFROMstatus+=str(TakeTextFrom("Gluhova.txt"))
-		textFROMstatus+=str(TakeTextFrom("Samsonova.txt"))
-		textFROMstatus+=str(TakeTextFrom("Zinnatshina.txt"))
+		textFROMstatus=str(TakeTextFrom(["Ahtarova.txt","Ershova.txt","Gluhova.txt","Samsonova.txt","Zinnatshina.txt"]))
+		#textFROMstatus=str(TakeTextFrom("Ahtarova.txt"))
+		#textFROMstatus+=str(TakeTextFrom("Ershova.txt"))
+		#textFROMstatus+=str(TakeTextFrom("Gluhova.txt"))
+		#textFROMstatus+=str(TakeTextFrom("Samsonova.txt"))
+		#textFROMstatus+=str(TakeTextFrom("Zinnatshina.txt"))
 		msg = bot.send_message(message.chat.id, textFROMstatus)
 	except IOError:
 		msg = bot.send_message(message.chat.id, 'status.txt not found')
