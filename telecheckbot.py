@@ -16,7 +16,7 @@ def TakeTextFrom(file):
 @bot.message_handler(commands=['status'])
 def send_welcome(message):
 	if not message.chat.id in chats:
-		msg = bot.send_message(message.chat.id, 'Dogovorimsya?')
+		msg = bot.send_message(message.chat.id, 'Дармаму, ты пришёл договориться?')
 		return 0
 
 	try:
