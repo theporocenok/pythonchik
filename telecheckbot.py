@@ -1,15 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import telebot
+import sys
+sys.path.insert(0, '/home/pi/py')
 
-token = "";
+import config
+
+token = config.tele_token;
 bot = telebot.TeleBot(token)
 
 chats = [297617298]
+dir='/home/pi/py/brut/status/'
 
 def TakeTextFrom(*files):
 	textFROMstatustxt=''
+	print(str(files))
 	for file in files:
+		print(file)
 		f = open(str(file))
 		textFROMstatustxt += f.read()
 		f.close()
@@ -18,11 +25,11 @@ def TakeTextFrom(*files):
 @bot.message_handler(commands=['status'])
 def send_welcome(message):
 	if not message.chat.id in chats:
-		msg = bot.send_message(message.chat.id, 'Дармаму, ты пришёл договориться?')
+		msg = bot.send_message(message.chat.id, 'Дормамму, ты пришёл договориться?')
 		return 0
 
 	try:
-		textFROMstatus=str(TakeTextFrom(["Ahtarova.txt","Ershova.txt","Gluhova.txt","Samsonova.txt","Zinnatshina.txt"]))
+		textFROMstatus=str(TakeTextFrom(dir+'Ahtarova.txt',dir+'Ershova.txt',dir+'Gluhova.txt',dir+'Samsonova.txt',dir+'Zinnatshina.txt'))
 		#textFROMstatus=str(TakeTextFrom("Ahtarova.txt"))
 		#textFROMstatus+=str(TakeTextFrom("Ershova.txt"))
 		#textFROMstatus+=str(TakeTextFrom("Gluhova.txt"))
@@ -30,7 +37,7 @@ def send_welcome(message):
 		#textFROMstatus+=str(TakeTextFrom("Zinnatshina.txt"))
 		msg = bot.send_message(message.chat.id, textFROMstatus)
 	except IOError:
-		msg = bot.send_message(message.chat.id, 'status.txt not found')
+		msg = bot.send_message(message.chat.id, 'Не знаю о чём ты, Дормамму, никаких статусов я не нашёл!')
 
 @bot.message_handler(commands=['getid'])
 def send_welcome(message):
