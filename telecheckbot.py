@@ -30,11 +30,6 @@ def send_welcome(message):
 
 	try:
 		textFROMstatus=str(TakeTextFrom(dir+'Ahtarova.txt',dir+'Ershova.txt',dir+'Gluhova.txt',dir+'Samsonova.txt',dir+'Zinnatshina.txt'))
-		#textFROMstatus=str(TakeTextFrom("Ahtarova.txt"))
-		#textFROMstatus+=str(TakeTextFrom("Ershova.txt"))
-		#textFROMstatus+=str(TakeTextFrom("Gluhova.txt"))
-		#textFROMstatus+=str(TakeTextFrom("Samsonova.txt"))
-		#textFROMstatus+=str(TakeTextFrom("Zinnatshina.txt"))
 		msg = bot.send_message(message.chat.id, textFROMstatus)
 	except IOError:
 		msg = bot.send_message(message.chat.id, 'Не знаю о чём ты, Дормамму, никаких статусов я не нашёл!')

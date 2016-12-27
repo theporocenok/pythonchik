@@ -1,4 +1,4 @@
-import vkontakte, time, requests, json, sys
+import vkontakte, time, requests, json, sys, config
 	
 def CheckUpdates(updates,need_chat_id):
 	#print "Updates had taken!"
@@ -11,7 +11,7 @@ def CheckUpdates(updates,need_chat_id):
 	return ids_of_unread_messages
 
 def main():
-	vk = vkontakte.API(token='')
+	vk = vkontakte.API(token=str(config.vk_token))
 	vlad_id = '279036239'
 	need_user_id = '2000000028'
 	need_chat_id = '2000000025'
@@ -31,7 +31,7 @@ def main():
 				server=longpoll['server']
 				ts=longpoll['ts']
 			except:
-				print "Nebernii otvet ot LongPollServer"
+				print ("Nebernii otvet ot LongPollServer")
 				continue
 		time.sleep(60)
 		url='https://'+str(server)+'?act=a_check&key='+str(key)+'&ts='+str(ts)+'&wait=30&mode=32&version=1'
@@ -69,8 +69,8 @@ def main():
 					#file_log.close()
 					try:
 						vk.get('messages.send',peer_id=sent_to,forward_messages=str(ids_of_unread_messages),v='5.60')
-					except Exception, ex:
-						print("Forward_messages: " + str(ids_of_unread_messages) + "\nLen of ids_of_unread_messages: " + str(len(ids_of_unread_messages)) + "\nError is: " + str(ex))
+					except:
+						print("Forward_messages: " + str(ids_of_unread_messages) + "\nLen of ids_of_unread_messages: " + str(len(ids_of_unread_messages)) + "\nError is: " + str(sys.exc_info()[0]))
 						#print(str(ex))
 						continue
 
